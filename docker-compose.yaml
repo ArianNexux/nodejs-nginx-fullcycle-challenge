@@ -3,7 +3,7 @@ version: '3'
 services:
   app:
     container_name: app_server
-    entrypoint: dockerize -wait tcp://db_server:3306 -timeout 50s node index.js
+    entrypoint: dockerize -wait tcp://db_server:3306 node index.js
     build:
       context: ./app
     ports:
