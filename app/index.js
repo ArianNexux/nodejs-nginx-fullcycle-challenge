@@ -10,6 +10,8 @@ const conn = mysql.createConnection({
     database: 'node-challenge'
 })
 
+conn.query("CREATE TABLE IF NOT EXISTS people(id int auto_increment, name varchar(2550), primary key(id))")
+
 app.get('/', (req, res) => {
     const queryToInsert = "INSERT INTO people(name) VALUES('Arian D.') "
     conn.query(queryToInsert, function (err) {
