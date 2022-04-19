@@ -21,6 +21,7 @@ services:
       - ./app:/usr/app
     depends_on:
       - db_server
+    restart: always
   nginx:
     image: nginx:latest
     ports:
