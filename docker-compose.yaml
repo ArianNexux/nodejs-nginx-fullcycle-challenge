@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  db_server:
+    image: mysql:latest
+    container_name: db_server
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: node-challenge
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
   app:
     container_name: app_server
     entrypoint: dockerize -wait tcp://db_server:3306 -timeout 40s -wait-retry-interval 3 node index.js
@@ -12,15 +21,6 @@ services:
       - ./app:/usr/app
     depends_on:
       - db_server
-  db_server:
-    image: mysql:latest
-    container_name: db_server
-    volumes:
-      - ./mysql:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE: node-challenge
-      MYSQL_ROOT_PASSWORD: root
-    restart: always
   nginx:
     image: nginx:latest
     ports:
