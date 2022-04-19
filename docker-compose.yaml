@@ -3,7 +3,7 @@ version: '3'
 services:
   app:
     container_name: app_server
-    entrypoint: dockerize -wait tcp://db_server:3306 node index.js
+    entrypoint: dockerize -wait tcp://db_server:3306 -timeout 40s -wait-retry-interval 3 node index.js
     build:
       context: ./app
     ports:
@@ -21,7 +21,7 @@ services:
       MYSQL_DATABASE: node-challenge
       MYSQL_ROOT_PASSWORD: root
     restart: always
-  nginx: 
+  nginx:
     image: nginx:latest
     ports:
       - 8080:80
