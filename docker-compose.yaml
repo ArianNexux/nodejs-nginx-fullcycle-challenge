@@ -21,7 +21,7 @@ services:
       MYSQL_DATABASE: node-challenge
       MYSQL_ROOT_PASSWORD: root
     restart: always
-  nginx:
+  nginx: 
     image: nginx:latest
     ports:
       - 8080:80
